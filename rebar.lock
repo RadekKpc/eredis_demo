@@ -1,0 +1,8 @@
+{"1.2.0",
+[{<<"eredis">>,{pkg,<<"eredis">>,<<"1.3.3">>},0}]}.
+[
+{pkg_hash,[
+ {<<"eredis">>, <<"45E9849CB9963BB6AF40A7C53B05A3CE878A3002E331360568929256C04A8945">>}]},
+{pkg_hash_ext,[
+ {<<"eredis">>, <<"D9BAC0C0707A3BF80F938BBC3907CECFEC2709E2572E7DE11211CCE40C269EC1">>}]}
+].
