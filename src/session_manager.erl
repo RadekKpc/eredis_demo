@@ -28,7 +28,6 @@
   add_session_info/3,
   get_session_info/1,
   check_active/1,
-  start/0,
   stop/0
 ]).
 
@@ -169,9 +168,3 @@ handle_call({delete_session, SessionId}, _From, Connection) ->
 handle_call(stop, _From, Connection) -> {stop, normal, ok, Connection}.
 
 handle_cast(_, _) -> {error, "no such command"}.
-
-start() ->
-  {ok, C} = eredis:start_link(),
-  {ok, <<"OK">>} = eredis:q(C, ["SET", "oss", "bar"]).
-
-
