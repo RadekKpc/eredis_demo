@@ -32,7 +32,7 @@
 ]).
 
 %% MODULE VARIABLES
-timeout() -> "20".
+timeout() -> "500".
 sessions_set_key() -> "sessions".
 sessions_key(Id) -> sessions_set_key() ++ ":" ++ lists:flatten(io_lib:format("~p", [Id])).
 session_is_active_key(Id) -> sessions_set_key() ++ ":" ++ lists:flatten(io_lib:format("~p", [Id])) ++ ":acite".
@@ -106,7 +106,8 @@ handle_call({add_session_info, SessionId, Key, Value}, _From, Connection) ->
   case check_exists_inner(SessionId, Connection) of
     {ok, true} ->
       case check_active_inner(SessionId, Connection) of
-        {ok, true} -> eredis:q(Connection, ["HSET" | [sessions_key(SessionId), Key, Value]]);
+        {ok, true} -> eredis:q(Connection, ["HSET" | [sessions_key(SessionId), Key, Value]]),
+          {reply, ok, Connection};
         {ok, false} -> {reply, {error, "Session expired"}, Connection};
         {error, Msg} -> {error, Msg}
       end;
